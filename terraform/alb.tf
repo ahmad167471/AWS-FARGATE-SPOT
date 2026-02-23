@@ -5,7 +5,7 @@
 resource "aws_security_group" "alb_sg" {
   name        = "ahmad-ecs-alb-sg"
   description = "Allow HTTP traffic to ALB"
-  vpc_id      = data.aws_vpc.default.id
+  vpc_id      = data.aws_vpc_id
 
   ingress {
     from_port   = 80
@@ -29,7 +29,7 @@ resource "aws_security_group" "alb_sg" {
 resource "aws_lb" "ecs_alb" {
   name               = "ahmad-ecs-alb"
   load_balancer_type = "application"
-  subnets            = data.aws_subnets.default.ids
+  subnets            = data.aws_subnets_ids
   security_groups    = [aws_security_group.alb_sg.id]
 
   enable_deletion_protection = false
@@ -43,7 +43,7 @@ resource "aws_lb_target_group" "ecs_tg" {
   name        = "ahmad-ecs-tg"
   port        = 1337
   protocol    = "HTTP"
-  vpc_id      = data.aws_vpc.default.id
+  vpc_id      = data.aws_vpc_id
   target_type = "ip"
 
   health_check {

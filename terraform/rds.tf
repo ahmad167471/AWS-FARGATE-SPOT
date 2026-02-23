@@ -1,12 +1,12 @@
 resource "aws_db_subnet_group" "db_subnet_group" {
   name       = "ahmad-db-subnet-group"
-  subnet_ids = data.aws_subnets.default.ids
+  subnet_ids = data.aws_subnets_ids
 }
 
 resource "aws_security_group" "rds_sg" {
   name        = "ahmad-rds-sg"
   description = "Allow ECS to connect to RDS"
-  vpc_id      = data.aws_vpc.default.id
+  vpc_id      = data.aws_vpc_id
 
   ingress {
     from_port       = 5432

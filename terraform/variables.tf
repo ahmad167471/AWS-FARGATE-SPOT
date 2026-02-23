@@ -7,8 +7,13 @@ variable "image_url" {
   type        = string
 }
 variable "vpc_id" {
-  description = "VPC ID for ECS deployment"
+  description = "Existing VPC ID"
   type        = string
+}
+
+variable "subnet_ids" {
+  description = "List of existing subnet IDs"
+  type        = list(string)
 }
 
 variable "db_username" {

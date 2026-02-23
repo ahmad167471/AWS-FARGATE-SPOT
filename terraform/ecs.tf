@@ -99,7 +99,7 @@ resource "aws_ecs_task_definition" "ahmad_task" {
 resource "aws_security_group" "ecs_sg" {
   name        = "ahmad-ecs-sg"
   description = "Managed by Terraform"
-  vpc_id      = data.aws_vpc.default.id
+  vpc_id      = data.aws_vpc_id
 
   ingress {
     from_port       = 1337
@@ -132,7 +132,7 @@ resource "aws_ecs_service" "ahmad_service" {
 }
 
   network_configuration {
-  subnets          = data.aws_subnets.default.ids
+  subnets          = data.aws_subnets_ids
   security_groups  = [aws_security_group.ecs_sg.id]
   assign_public_ip = true
 }
