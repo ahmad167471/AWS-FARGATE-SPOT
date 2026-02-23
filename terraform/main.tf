@@ -7,6 +7,7 @@ terraform {
   }
 }
 
+#fixed
 provider "aws" {
   region = var.region
 }
