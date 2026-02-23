@@ -37,7 +37,7 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build -t $ECR_REGISTRY/ahmad-ecs-task:$IMAGE_TAG ./strapi
+          docker build -t $ECR_REGISTRY/ahmad-ecs-task:$IMAGE_TAG .
           docker push $ECR_REGISTRY/ahmad-ecs-task:$IMAGE_TAG
 
       - name: Update ECS Task with Real Image
