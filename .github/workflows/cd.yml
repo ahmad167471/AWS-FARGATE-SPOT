@@ -9,13 +9,10 @@ jobs:
   infra:
     runs-on: ubuntu-latest
 
-    env:
-      TF_VAR_vpc_id: ${{ secrets.VPC_ID }}
-      TF_VAR_image_url: dummy
-
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+
       - name: Configure AWS
         uses: aws-actions/configure-aws-credentials@v3
         with:
@@ -34,9 +31,13 @@ jobs:
       - name: Terraform Plan
         run: |
           cd terraform
-          terraform plan
+          terraform plan \
+            -var="vpc_id=vpc-0b4d6262d67525f8b" \
+            -var='subnet_ids=["subnet-0c2049076b8e2afa7","subnet-0e983ddf13963dc33"]'
 
       - name: Terraform Apply
         run: |
           cd terraform
-          terraform apply -auto-approve
+          terraform apply -auto-approve \
+            -var="vpc_id=vpc-0b4d6262d67525f8b" \
+            -var='subnet_ids=["subnet-0c2049076b8e2afa7","subnet-0e983ddf13963dc33"]'
